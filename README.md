@@ -1,90 +1,78 @@
-# ChatBot V2
+# Azure OpenAI ChatBot
 
-This is an expanded version of the configurable chatbot application, rebuilt with ASP.NET Core Web API backend and Angular frontend.
-
-## Project Structure
-
-```
-ChatBotV2/
-├── Backend/          # ASP.NET Core Web API
-│   ├── Program.cs    # API endpoints for chat and settings
-│   ├── appsettings.json
-│   └── Backend.csproj
-└── Frontend/         # Angular SPA
-    ├── src/
-    │   ├── app/
-    │   │   ├── admin/        # Settings dashboard
-    │   │   ├── chat/         # Chat interface
-    │   │   └── api.service.ts # API client
-    │   └── main.ts
-    └── package.json
-```
+A chatbot application with ASP.NET Core API backend that integrates with Azure OpenAI. The backend is complete with configurable settings, while the Angular frontend is planned for future development.
 
 ## Features
 
-- **Admin Dashboard**: Configure chatbot settings (voice tone, context, max words limit)
-- **Chat Interface**: Interact with Azure OpenAI using configured settings
-- **Two-phase workflow**:
-  1. Customization phase: Set up chatbot behavior via admin dashboard
-  2. Chat phase: Use the configured chatbot for conversations
+- Clean Architecture with Domain, Application, Infrastructure, and API layers
+- Azure OpenAI integration for conversations
+- Configurable chatbot settings (personality, context, limits)
+- Settings persistence to JSON files
+- REST API with Swagger documentation
+- Input validation and error handling
+
+## Architecture
+
+`
+ChatBotV2/
+ ChatBotV2.Domain/          # Business entities and rules
+ ChatBotV2.Application/     # Use cases and business logic
+ ChatBotV2.Infrastructure/  # External services (OpenAI, storage)
+ ChatBotV2.Api/             # ASP.NET Core Web API
+`
+
+## Tech Stack
+
+### Backend
+- ASP.NET Core 8.0
+- Azure OpenAI
+- Swashbuckle (API documentation)
+- DotNetEnv (environment variables)
+
+### Frontend (Planned)
+- Angular
+- TypeScript
 
 ## Prerequisites
 
-- .NET 8 SDK
-- Node.js 18+
-- Azure account with OpenAI deployment
+- .NET 8.0 SDK
+- Azure OpenAI resource
 
-## Backend Setup
+## Getting Started
 
-1. Configure `Backend/appsettings.json`:
-```json
-{
-  "AzureOpenAI": {
-    "Endpoint": "https://your-resource.openai.azure.com/",
-    "Deployment": "gpt-4o-mini",
-    "Key": "your-api-key"
-  }
-}
-```
+### Backend Setup
 
-2. Install dependencies:
-```bash
-cd Backend
-dotnet restore
-```
+1. Clone the repository
+2. Create .env file in ChatBotV2.Api/:
+   `
+   AzureOpenAI__Endpoint=https://your-resource.openai.azure.com/
+   AzureOpenAI__Key=your-api-key-here
+   AzureOpenAI__Deployment=gpt-4o-mini
+   `
+3. Run: cd ChatBotV2.Api && dotnet run
+4. Access: https://localhost:7xxx/swagger/index.html
 
-3. Run the server:
-```bash
-dotnet run
-```
+### Frontend (Coming Soon)
 
-The API will be available at `http://localhost:5000` (or port specified in launchSettings.json)
-
-## Frontend Setup
-
-1. Install dependencies:
-```bash
-cd Frontend
-npm install
-```
-
-2. Start development server:
-```bash
-ng serve
-```
-
-Open browser at `http://localhost:4200`
+The Angular frontend will include:
+- Admin dashboard for settings configuration
+- Chat interface
+- Settings management
 
 ## API Endpoints
 
-- `GET /api/settings` - Retrieve current chatbot settings
-- `PUT /api/settings` - Update chatbot configuration
-- `POST /api/chat` - Send message to chatbot
+- GET /api/settings - Get settings
+- PUT /api/settings - Update settings
+- POST /api/chat - Send chat message
 
-## Usage
+## Contributing
 
-1. Navigate to Admin Dashboard (`/admin`)
-2. Configure voice tone, context, and max word limit
-3. Save settings
-4. Go to Chat (`/chat`)
-5. Converse with the configured chatbot
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Push to branch
+5. Open a Pull Request
+
+## License
+
+MIT License
