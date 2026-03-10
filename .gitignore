@@ -1,0 +1,12 @@
+# File di ambiente con segreti
+.env
+
+# Cartelle di build
+bin/
+obj/
+
+# File di Visual Studio
+.vs/
+
+# Log files
+*.log
