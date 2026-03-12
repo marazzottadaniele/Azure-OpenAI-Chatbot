@@ -9,5 +9,5 @@ namespace ChatBotV2.Application.Interfaces;
 /// </summary>
 public interface IChatApplicationService
 {
-    Task<ChatResponseDto> HandleChatRequestAsync(ChatRequest request);
+    Task<ChatResponseDto> HandleChatRequestAsync(ChatRequest request, IEnumerable<HistoryMessage> history);
 }

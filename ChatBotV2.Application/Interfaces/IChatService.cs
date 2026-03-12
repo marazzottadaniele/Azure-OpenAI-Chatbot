@@ -8,5 +8,5 @@ namespace ChatBotV2.Application.Interfaces;
 /// </summary>
 public interface IChatService
 {
-    Task<string> GetChatResponseAsync(ChatRequest request, ChatbotSettings settings);
+    Task<string> GetChatResponseAsync(ChatRequest request, ChatbotSettings settings, IEnumerable<HistoryMessage> history);
 }

@@ -21,7 +21,7 @@ public class ChatApplicationService : IChatApplicationService
     /// <summary>
     /// Handles a chat request by applying business rules.
     /// </summary>
-    public async Task<ChatResponseDto> HandleChatRequestAsync(ChatRequest request)
+    public async Task<ChatResponseDto> HandleChatRequestAsync(ChatRequest request, IEnumerable<HistoryMessage> history)
     {
         var settings = _settingsService.GetSettings();
 
@@ -44,7 +44,7 @@ public class ChatApplicationService : IChatApplicationService
         }
 
         // Call the infrastructure service to get the response
-        var response = await _chatService.GetChatResponseAsync(request, settings);
+        var response = await _chatService.GetChatResponseAsync(request, settings, history);
 
         return new ChatResponseDto
         {

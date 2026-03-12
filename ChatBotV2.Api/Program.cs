@@ -39,8 +39,6 @@ builder.Services.AddSingleton<OpenAIClient>(sp =>
     return new OpenAIClient(new Uri(endpoint), new AzureKeyCredential(key));
 });
 
-
-
 builder.Services.AddSingleton<IChatService>(sp =>
 {
     var client = sp.GetRequiredService<OpenAIClient>();

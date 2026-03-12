@@ -18,7 +18,7 @@ public class ChatController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(object), 200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<object>> Chat([FromBody] ChatRequest request)
+    public async Task<ActionResult<object>> Chat([FromBody] ChatRequest request, IEnumerable<HistoryMessage> history)
     {
         if (!ModelState.IsValid)
         {
@@ -27,7 +27,7 @@ public class ChatController : ControllerBase
 
         try
         {
-            var response = await _chatApplicationService.HandleChatRequestAsync(request);
+            var response = await _chatApplicationService.HandleChatRequestAsync(request, history);
             return Ok(new
             {
                 content = response.Content,
