@@ -4,6 +4,7 @@ using ChatBotV2.Api.Filters;
 using ChatBotV2.Application.Interfaces;
 using ChatBotV2.Application.Services;
 using ChatBotV2.Infrastructure.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,12 @@ builder.Services.AddSingleton<IChatService>(sp =>
         throw new InvalidOperationException("Azure OpenAI deployment not configured");
     return new ChatService(client, deployment);
 });
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
 var app = builder.Build();
 

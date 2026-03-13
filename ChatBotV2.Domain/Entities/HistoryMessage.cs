@@ -1,20 +1,18 @@
 ﻿using ChatBotV2.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ChatBotV2.Domain.Entities
 {
-    public record HistoryMessage
-    {
-        public HistoryRole Role;
+    public record HistoryMessage(
 
-        public string Message;
+            [Required(ErrorMessage = "The role is required")]
+            HistoryRole Role,
 
-        public DateTimeOffset Timestamp;
+            [Required(ErrorMessage = "The message is required")]
+            [StringLength(2000, ErrorMessage = "The message cannot exceed 2000 characters")]
+            string Message,
 
-        public HistoryMessage(HistoryRole role, string message, DateTimeOffset timestamp)
-        {
-            Role = role;
-            Message = message ?? throw new ArgumentNullException(nameof(message));
-            Timestamp = timestamp;
-        }
-    }
+            DateTimeOffset Timestamp
+    );
 }

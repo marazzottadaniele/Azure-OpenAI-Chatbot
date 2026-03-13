@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ChatBotV2.Application.Interfaces;
-using ChatBotV2.Domain.Entities;
+using ChatBotV2.Application.DTOs.Requests;
 
 namespace ChatBotV2.Api.Controllers;
 
@@ -18,7 +18,7 @@ public class ChatController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(object), 200)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult<object>> Chat([FromBody] ChatRequest request, IEnumerable<HistoryMessage> history)
+    public async Task<ActionResult<object>> Chat([FromBody] ChatRequestDto input)
     {
         if (!ModelState.IsValid)
         {
@@ -27,7 +27,7 @@ public class ChatController : ControllerBase
 
         try
         {
-            var response = await _chatApplicationService.HandleChatRequestAsync(request, history);
+            var response = await _chatApplicationService.HandleChatRequestAsync(input.Request, input.History);
             return Ok(new
             {
                 content = response.Content,
