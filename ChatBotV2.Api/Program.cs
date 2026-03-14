@@ -4,6 +4,7 @@ using ChatBotV2.Api.Filters;
 using ChatBotV2.Application.Interfaces;
 using ChatBotV2.Application.Services;
 using ChatBotV2.Infrastructure.Services;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +54,7 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
 
 var app = builder.Build();
