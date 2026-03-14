@@ -1,3 +1,5 @@
+namespace ChatBotV2.Application.DTOs.Responses;
+
 /// <summary>
 /// DTO for chat response (Application Layer)
 /// </summary>
