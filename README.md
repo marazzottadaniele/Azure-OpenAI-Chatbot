@@ -61,9 +61,54 @@ The Angular frontend will include:
 
 ## API Endpoints
 
-- GET /api/settings - Get settings
-- PUT /api/settings - Update settings
-- POST /api/chat - Send chat message
+# Entities
+
+ChatbotSettings class (
+   string   VoiceTone
+   string   Context
+   int      MaxWords
+   string   SystemMessage
+)
+
+HistoryRole enum (
+   System
+   User
+   Assistant
+)
+
+HistoryMessage record (
+   HistoryRole    Role
+   string         Message
+   DateTimeOffset Timestamp
+)
+
+ChatRequest record(
+   string   Message
+)
+
+ChatRequestDto(
+   ChatRequest       Request 
+   HistoryMessage[]  History 
+)
+
+ChatRequestDto(
+   string   Content
+   DateTime Timestamp
+   int      WordCount
+)
+
+
+# Routes
+
+- GET    /api/settings  - Get settings
+   input:   none
+   output:  ChatbotSettings
+- PUT    /api/settings  - Update settings
+   input:   ChatbotSettings
+   output:  ChatbotSettings
+- POST   /api/chat      - Send chat message
+   input:   ChatRequestDto
+   output:  ChatResponseDto
 
 ## Contributing
 
