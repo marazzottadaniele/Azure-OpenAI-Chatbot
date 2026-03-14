@@ -1,8 +1,0 @@
-<h2>Chat with Bot</h2>
-<div class="messages">
-  <div *ngFor="let msg of messages" [class.user]="msg.isUser" [class.bot]="!msg.isUser">
-    {{ msg.text }}
-  </div>
-</div>
-<input [(ngModel)]="userMessage" (keyup.enter)="sendMessage()" placeholder="Type a message...">
-<button (click)="sendMessage()">Send</button>
