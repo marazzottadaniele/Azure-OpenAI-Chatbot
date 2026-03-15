@@ -15,10 +15,11 @@ A chatbot application with ASP.NET Core API backend that integrates with Azure O
 
 `
 ChatBotV2/
- ChatBotV2.Domain/          # Business entities and rules
- ChatBotV2.Application/     # Use cases and business logic
- ChatBotV2.Infrastructure/  # External services (OpenAI, storage)
- ChatBotV2.Api/             # ASP.NET Core Web API
+   ChatBotV2.Domain/                      # Business entities and rules
+   ChatBotV2.Application/                 # Use cases and business logic
+   ChatBotV2.Infrastructure/              # External services (OpenAI, storage)
+   ChatBotV2.Api/                         # ASP.NET Core Web API
+   ChatBotV2.Frontent/chatbot-frontend    # Frontend UI
 `
 
 ## Tech Stack
@@ -29,7 +30,7 @@ ChatBotV2/
 - Swashbuckle (API documentation)
 - DotNetEnv (environment variables)
 
-### Frontend (Planned)
+### Frontend
 - Angular
 - TypeScript
 
@@ -61,7 +62,7 @@ The Angular frontend will include:
 
 ## API Endpoints
 
-# Entities
+### Entities
 
 ChatbotSettings class (
    string   VoiceTone
@@ -98,7 +99,7 @@ ChatRequestDto(
 )
 
 
-# Routes
+### Routes
 
 - GET    /api/settings  - Get settings
    input:   none
