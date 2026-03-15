@@ -54,7 +54,7 @@ protected sendMessage(): void {
       this.isLoading.set(false);
     },
     error: (err) => {
-      this.errorMessage.set('Failed to send message.');
+      this.errorMessage.set(err.messages);
       this.isLoading.set(false);
       console.error(err);
     }

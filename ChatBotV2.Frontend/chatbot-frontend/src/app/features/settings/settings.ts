@@ -38,7 +38,7 @@ export class Settings implements OnInit {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.errorMessage.set('Failed to load settings.');
+        this.errorMessage.set(err.message);
         this.isLoading.set(false);
         console.error(err);
       }
@@ -60,7 +60,7 @@ export class Settings implements OnInit {
         this.isSaving.set(false);
       },
       error: (err) => {
-        this.errorMessage.set('Failed to save settings.');
+        this.errorMessage.set(err.message);
         this.isSaving.set(false);
         console.error(err);
       }
