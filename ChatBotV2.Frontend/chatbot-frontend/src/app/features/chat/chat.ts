@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../core/services/chat';
 import { HistoryMessage } from '../../core/models/history-message.model';
 import { ChatResponseDto } from '../../core/models/chat.model';
+import { ChatBubble } from './chat-bubble/chat-bubble';
 
 @Component({
   selector: 'app-chat',
-  imports: [FormsModule],
+  imports: [FormsModule, ChatBubble],
   templateUrl: './chat.html',
   styleUrl: './chat.scss',
 })

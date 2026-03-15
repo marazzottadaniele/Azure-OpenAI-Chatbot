@@ -3,11 +3,7 @@
 
   <div class="messages">
     @for (msg of messages(); track msg.timestamp) {
-      <div class="message" [class.user]="msg.role === 'User'" [class.assistant]="msg.role === 'Assistant'">
-        <span class="role">{{ msg.role }}</span>
-        <p class="content">{{ msg.message }}</p>
-        <span class="timestamp">{{ msg.timestamp }}</span>
-      </div>
+        <app-chat-bubble [message]="msg"/>
     } @empty {
       <p class="empty">No messages yet. Start a conversation.</p>
     }

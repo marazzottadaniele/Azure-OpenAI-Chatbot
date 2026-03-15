@@ -1,0 +1,5 @@
+<div class="chat-bubble" [class.user]="message().role === 'User'" [class.assistant]="message().role === 'Assistant'">
+  <span class="role">{{ message().role }}</span>
+  <p class="content">{{ message().message }}</p>
+  <span class="timestamp">{{ message().timestamp }}</span>
+</div>
