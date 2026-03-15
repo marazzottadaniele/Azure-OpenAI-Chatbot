@@ -13,14 +13,14 @@ A chatbot application with ASP.NET Core API backend that integrates with Azure O
 
 ## Architecture
 
-`
+
 ChatBotV2/
    ChatBotV2.Domain/                      # Business entities and rules
    ChatBotV2.Application/                 # Use cases and business logic
    ChatBotV2.Infrastructure/              # External services (OpenAI, storage)
    ChatBotV2.Api/                         # ASP.NET Core Web API
    ChatBotV2.Frontent/chatbot-frontend    # Frontend UI
-`
+
 
 ## Tech Stack
 
