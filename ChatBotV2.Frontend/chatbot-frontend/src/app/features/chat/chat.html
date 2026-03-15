@@ -1,1 +1,35 @@
-<p>chat works!</p>
+<div class="chat-container">
+  <h1>Chat</h1>
+
+  <div class="messages">
+    @for (msg of messages(); track msg.timestamp) {
+      <div class="message" [class.user]="msg.role === 'User'" [class.assistant]="msg.role === 'Assistant'">
+        <span class="role">{{ msg.role }}</span>
+        <p class="content">{{ msg.message }}</p>
+        <span class="timestamp">{{ msg.timestamp }}</span>
+      </div>
+    } @empty {
+      <p class="empty">No messages yet. Start a conversation.</p>
+    }
+  </div>
+
+  @if (isLoading()) {
+    <p class="loading">Assistant is typing...</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <div class="input-area">
+    <textarea
+      [(ngModel)]="inputMessage"
+      placeholder="Type a message..."
+      [disabled]="isLoading()"
+      (keydown.enter)="$event.preventDefault(); sendMessage()"
+    ></textarea>
+    <button (click)="sendMessage()" [disabled]="!canSend()">
+      Send
+    </button>
+  </div>
+</div>
