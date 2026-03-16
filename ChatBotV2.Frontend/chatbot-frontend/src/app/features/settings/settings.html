@@ -1,55 +1,68 @@
 <div class="settings-container">
-  <h1>Chatbot Settings</h1>
+  <div class="page-header">
+    <h1>Chatbot Configuration</h1>
+    <p>Customize how the assistant behaves and responds.</p>
+  </div>
 
   @if (isLoading()) {
-    <p>Loading...</p>
+  <p>Loading...</p>
   } @else {
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  @if (errorMessage()) {
+  <div class="message error">{{ errorMessage() }}</div>
+  }
+  @if (successMessage()) {
+  <div class="message success">{{ successMessage() }}</div>
+  }
 
-      <div class="form-field">
-        <label for="voiceTone">Voice Tone</label>
-        <input id="voiceTone" type="text" formControlName="voiceTone" />
-        @if (form.controls.voiceTone.invalid && form.controls.voiceTone.touched) {
-          <span class="error">Voice tone is required</span>
-        }
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="card">
+      <div class="card-title">Personality</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="voiceTone">Voice Tone</label>
+          <input id="voiceTone" type="text" formControlName="voiceTone" />
+          @if (form.controls.voiceTone.invalid && form.controls.voiceTone.touched) {
+          <span class="error">Required</span>
+          }
+        </div>
+        <div class="range-group">
+          <label>Max Words</label>
+          <div class="range-row">
+            <input type="range" min="0" max="1000" step="10" [value]="form.controls.maxWords.value"
+              (input)="form.controls.maxWords.setValue(+$any($event.target).value)"
+              (change)="form.controls.maxWords.markAsTouched()" />
+            <input type="number" min="1" max="1000" formControlName="maxWords" class="range-number" />
+          </div>
+          @if (form.controls.maxWords.invalid && form.controls.maxWords.touched) {
+          <span class="error">Must be between 1 and 1000</span>
+          }
+        </div>
+        <div class="form-group full">
+          <label for="context">Context</label>
+          <textarea id="context" formControlName="context"></textarea>
+          @if (form.controls.context.invalid && form.controls.context.touched) {
+          <span class="error">Required</span>
+          }
+        </div>
       </div>
+    </div>
 
-      <div class="form-field">
-        <label for="context">Context</label>
-        <textarea id="context" formControlName="context"></textarea>
-        @if (form.controls.context.invalid && form.controls.context.touched) {
-          <span class="error">Context is required</span>
-        }
-      </div>
-
-      <div class="form-field">
-        <label for="maxWords">Max Words (1-1000)</label>
-        <input id="maxWords" type="number" formControlName="maxWords" />
-        @if (form.controls.maxWords.invalid && form.controls.maxWords.touched) {
-          <span class="error">Must be a number between 1 and 1000</span>
-        }
-      </div>
-
-      <div class="form-field">
+    <div class="card">
+      <div class="card-title">System Prompt</div>
+      <div class="form-group">
         <label for="systemMessage">System Message</label>
         <textarea id="systemMessage" formControlName="systemMessage"></textarea>
         @if (form.controls.systemMessage.invalid && form.controls.systemMessage.touched) {
-          <span class="error">System message is required</span>
+        <span class="error">Required</span>
         }
       </div>
+    </div>
 
-      @if (errorMessage()) {
-        <p class="error">{{ errorMessage() }}</p>
-      }
-
-      @if (successMessage()) {
-        <p class="success">{{ successMessage() }}</p>
-      }
-
-      <button type="submit" [disabled]="form.invalid || isSaving()">
+    <div class="form-actions">
+      <button type="button" class="btn btn-ghost" (click)="form.reset()">Reset</button>
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isSaving()">
         {{ isSaving() ? 'Saving...' : 'Save Settings' }}
       </button>
-
-    </form>
+    </div>
+  </form>
   }
-</div>

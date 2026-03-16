@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-root: #0f1117;
+  --bg-surface: #161822;
+  --bg-input: #0f1117;
+  --accent: #6c8ef5;
+  --accent-dim: rgba(108, 142, 245, 0.12);
+  --text-primary: #e2e4f0;
+  --text-secondary: #c2c5d6;
+  --text-muted: #6b6f88;
+  --text-faint: #3d4060;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(108, 142, 245, 0.5);
+  --success: #4caf89;
+  --error: #e05c5c;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-root);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+textarea {
+  resize: none;
+}

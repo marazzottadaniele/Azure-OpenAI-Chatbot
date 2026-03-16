@@ -11,7 +11,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           message = 'Cannot reach the server. Check your connection.';
           break;
         case 400:
-          message = 'Invalid request.';
+          message = `Invalid request. ${error.error ?? ''}`.trim();
           break;
         case 404:
           message = 'Resource not found.';

@@ -17,47 +17,50 @@ export class Chat {
   protected readonly messages = signal<HistoryMessage[]>([]);
   protected readonly inputMessage = signal('');
   protected readonly isLoading = signal(false);
-  protected readonly errorMessage = signal<string | null>(null);
 
   protected readonly canSend = computed(() =>
     this.inputMessage().trim().length > 0 && !this.isLoading()
   );
 
-protected sendMessage(): void {
-  const text = this.inputMessage().trim();
-  if (!text) return;
+  protected sendMessage(): void {
+    const text = this.inputMessage().trim();
+    if (!text) return;
 
-  const userMessage: HistoryMessage = {
-    role: 'User',
-    message: text,
-    timestamp: new Date().toISOString()
-  };
+    const userMessage: HistoryMessage = {
+      role: 'User',
+      message: text,
+      timestamp: new Date().toISOString()
+    };
 
-  const currentHistory = this.messages();
+    const currentHistory = this.messages();
 
-  this.messages.update(msgs => [...msgs, userMessage]);
-  this.inputMessage.set('');
-  this.isLoading.set(true);
-  this.errorMessage.set(null);
+    this.messages.update(msgs => [...msgs, userMessage]);
+    this.inputMessage.set('');
+    this.isLoading.set(true);
 
-  this.chatService.sendMessage({
-    request: { message: text },
-    history: currentHistory
-  }).subscribe({
-    next: (response: ChatResponseDto) => {
-      const assistantMessage: HistoryMessage = {
-        role: 'Assistant',
-        message: response.content,
-        timestamp: response.timestamp
-      };
-      this.messages.update(msgs => [...msgs, assistantMessage]);
-      this.isLoading.set(false);
-    },
-    error: (err) => {
-      this.errorMessage.set(err.messages);
-      this.isLoading.set(false);
-      console.error(err);
-    }
-  });
-}
+    this.chatService.sendMessage({
+      request: { message: text },
+      history: currentHistory
+    }).subscribe({
+      next: (response: ChatResponseDto) => {
+        const assistantMessage: HistoryMessage = {
+          role: 'Assistant',
+          message: response.content,
+          timestamp: response.timestamp
+        };
+        this.messages.update(msgs => [...msgs, assistantMessage]);
+        this.isLoading.set(false);
+      },
+      error: (err) => {
+        const errorMessage: HistoryMessage = {
+          role: 'System',
+          message: err.message,
+          timestamp: new Date().toISOString()
+        };
+        this.messages.update(msgs => [...msgs, errorMessage]);
+        this.isLoading.set(false);
+        console.error(err);
+      }
+    });
+  }
 }

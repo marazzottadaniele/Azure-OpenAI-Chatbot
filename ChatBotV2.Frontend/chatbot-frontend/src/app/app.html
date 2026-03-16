@@ -1,6 +1,15 @@
-<nav>
-  <a routerLink="/settings">Settings</a>
-  <a routerLink="/chat">Chat</a>
+<nav class="topbar">
+  <div class="logo">chatbot<span>.</span>admin</div>
+
+  <div class="nav">
+    <a routerLink="/settings" routerLinkActive="active">Settings</a>
+    <a routerLink="/chat" routerLinkActive="active">Chat</a>
+  </div>
+
+  <div class="status" [class]="apiStatus().toLowerCase()">
+    <div class="dot" [class]="apiStatus().toLowerCase()"></div>
+    API {{ apiStatus() }}
+  </div>
 </nav>
 
 <main>

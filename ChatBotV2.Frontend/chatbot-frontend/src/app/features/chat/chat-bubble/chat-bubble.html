@@ -1,5 +1,5 @@
-<div class="chat-bubble" [class.user]="message().role === 'User'" [class.assistant]="message().role === 'Assistant'">
-  <span class="role">{{ message().role }}</span>
-  <p class="content">{{ message().message }}</p>
-  <span class="timestamp">{{ message().timestamp }}</span>
+<div class="chat-bubble" [class.user]="message().role === 'User'" [class.assistant]="message().role === 'Assistant'"
+  [class.system]="message().role === 'System'">
+  <div class="bubble">{{ message().message }}</div>
+  <div class="meta">{{ message().role }} · {{ message().timestamp }}</div>
 </div>

@@ -1,31 +1,31 @@
 <div class="chat-container">
-  <h1>Chat</h1>
+  <div class="page-header">
+    <h1>Chat</h1>
+    <p>Test your chatbot configuration.</p>
+  </div>
 
   <div class="messages">
     @for (msg of messages(); track msg.timestamp) {
-        <app-chat-bubble [message]="msg"/>
+    <app-chat-bubble [message]="msg" />
     } @empty {
-      <p class="empty">No messages yet. Start a conversation.</p>
+    <p class="empty">No messages yet. Start a conversation.</p>
     }
   </div>
 
   @if (isLoading()) {
-    <p class="loading">Assistant is typing...</p>
-  }
-
-  @if (errorMessage()) {
-    <p class="error">{{ errorMessage() }}</p>
+  <p class="loading">Assistant is typing...</p>
   }
 
   <div class="input-area">
-    <textarea
-      [(ngModel)]="inputMessage"
-      placeholder="Type a message..."
-      [disabled]="isLoading()"
-      (keydown.enter)="$event.preventDefault(); sendMessage()"
-    ></textarea>
-    <button (click)="sendMessage()" [disabled]="!canSend()">
-      Send
+    <div class="input-wrap">
+      <textarea [(ngModel)]="inputMessage" placeholder="Type a message..." [disabled]="isLoading()"
+        (keydown.enter)="$event.preventDefault(); sendMessage()">
+      </textarea>
+    </div>
+    <button class="send-btn" (click)="sendMessage()" [disabled]="!canSend()">
+      <svg viewBox="0 0 24 24">
+        <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+      </svg>
     </button>
   </div>
 </div>
